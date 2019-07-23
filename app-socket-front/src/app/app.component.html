@@ -1,0 +1,51 @@
+
+
+<div class="container-fluid">
+
+<h3>Instrumento</h3>
+<div class="ui-g" style="width:250px;margin-bottom:10px">
+    <div class="ui-g-12">
+      <p-checkbox 
+      name="group2" 
+      value="Technology" 
+      label="Navegacion Inercial" 
+      inputId="technology">
+      </p-checkbox>
+    </div>
+    <div class="ui-g-12">
+      <p-checkbox 
+      name="group2" 
+      value="Technology" 
+      label="Altimetro" 
+      inputId="technology">
+      </p-checkbox>
+    </div>
+    <div class="ui-g-12">
+      <p-checkbox 
+      name="group2" 
+      value="Technology" 
+      label="GPS" 
+      inputId="technology">
+      </p-checkbox>
+    </div>
+</div>
+
+Selected Categories: <span *ngFor="let cat of selectedCategories" style="margin-right:10px">{{cat}} </span>
+
+
+    <div class="row">
+      <div class="col-sm">
+        <p-chart type="radar" [data]="dataNavInercial"></p-chart>
+      </div>
+      <div class="col-sm">
+        <p-chart type="polarArea" [data]="dataNavGPS"></p-chart>
+      </div>
+      <div class="col-sm">
+        <p-chart type="line" [data]="dataNavRadio"></p-chart>
+      </div>
+  </div>
+</div>
+
+
+
+<router-outlet></router-outlet>
