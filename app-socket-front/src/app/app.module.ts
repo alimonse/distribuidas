@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
+import { FormsModule }    from '@angular/forms';
+
 
 import {ChartModule} from 'primeng/chart';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -20,7 +22,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     ButtonModule,
     BrowserAnimationsModule,
     ChartModule,
-    CheckboxModule
+    CheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app-socket-front';
 
-  selectedCategories: string[] = [];
+  //  selectedCategories: string[] = ['navIn', 'alt', 'GPS'];
+  // selectedCategories: string[] = [];
+
+  isShown: boolean = false ;
+
+  selectedNavInercial: boolean = true;
+  selectedRadioAltimetro: boolean = true;
+  selectedGPS: boolean = true;
 
   dataNavInercial: any;
   dataNavRadio: any;
@@ -49,7 +56,7 @@ export class AppComponent {
         this.datosNavInercial[paso] = Math.round(Math.random() * (max - min) + min)
       }
     };
-    console.log(this.datosNavInercial, 'datos')
+    // console.log(this.datosNavInercial, 'datos')
   }
 
   crearRandomicosRadioaltímetro(max, min) {
@@ -57,7 +64,7 @@ export class AppComponent {
     for (paso = 0; paso < 10; paso++) {
       this.datosRadioaltimetro[paso] = Math.round(Math.random() * (max - min) + min);
     };
-    console.log(this.datosRadioaltimetro, 'datos')
+    // console.log(this.datosRadioaltimetro, 'datos')
   }
 
   crearRandomicosGPS(max, min) {
@@ -70,7 +77,7 @@ export class AppComponent {
         this.datosGPS[paso] = Math.round(Math.random() * (1 - 0) + 0)
       }
     };
-    console.log(this.datosGPS, 'datos GPS')
+    // console.log(this.datosGPS, 'datos GPS')
   }
   //  navegación inercial ->  tres datos de tipo entero y tres de tipo real
   // radioaltímetro ->  10 datos de tipo real
@@ -119,15 +126,29 @@ export class AppComponent {
         label: 'GPS'
     }],
     labels: [
-        "Red",
-        "Green",
-        "Yellow",
-        "Grey",
-        "Blue",
-        "Blue"
+        "Punto 1",
+        "Punto 2",
+        "Punto 3",
+        "Punto 4",
+        "Punto 5",
+        "Punto 6"
     ]
     };
 
+  } 
+
+  mostrarNavInercial($event: Event) {
+    this.selectedNavInercial != this.selectedNavInercial //create new data
+  }
+
+  mostrarRadioAltimetro($event: Event) {
+    this.selectedRadioAltimetro != this.selectedNavInercial //create new data
+    console.log(this.selectedNavInercial, 'que imprime')
+  }
+
+  mostrarGPS($event: Event) {
+    this.selectedGPS != this.selectedNavInercial //create new data
+    console.log(this.selectedNavInercial, 'que imprime')
   }
 
 }

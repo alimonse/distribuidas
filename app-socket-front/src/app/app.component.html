@@ -2,45 +2,51 @@
 
 <div class="container-fluid">
 
-<h3>Instrumento</h3>
-<div class="ui-g" style="width:250px;margin-bottom:10px">
-    <div class="ui-g-12">
+<h3>Instrumentos</h3>
+<div class="row">
+    <div class="ui-g-3">
       <p-checkbox 
-      name="group2" 
-      value="Technology" 
-      label="Navegacion Inercial" 
-      inputId="technology">
+        name="group1" 
+        value="1" 
+        label="NavegacionInercial" 
+        binary="true"
+        (click)="mostrarNavInercial($event)"
+        [(ngModel)]="selectedNavInercial" 
+        inputId="1">
       </p-checkbox>
     </div>
-    <div class="ui-g-12">
+    <div class="ui-g-3">
       <p-checkbox 
-      name="group2" 
-      value="Technology" 
-      label="Altimetro" 
-      inputId="technology">
+        name="group1" 
+        value="3" 
+        label="GPS"
+        binary="true"
+        (click)="mostrarGPS($event)"
+        [(ngModel)]="selectedGPS" 
+        inputId="3">
       </p-checkbox>
     </div>
-    <div class="ui-g-12">
+    <div class="ui-g-3">
       <p-checkbox 
-      name="group2" 
-      value="Technology" 
-      label="GPS" 
-      inputId="technology">
+        name="group1" 
+        value="2" 
+        label="RadioAltimetro" 
+        binary="true"
+        (click)="mostrarNavInercial($event)"
+        [(ngModel)]="selectedRadioAltimetro" 
+        inputId="2">
       </p-checkbox>
     </div>
 </div>
 
-Selected Categories: <span *ngFor="let cat of selectedCategories" style="margin-right:10px">{{cat}} </span>
-
-
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm-6" [hidden]="!selectedNavInercial">
         <p-chart type="radar" [data]="dataNavInercial"></p-chart>
       </div>
-      <div class="col-sm">
+      <div class="col-sm-6" [hidden]="!selectedGPS">
         <p-chart type="polarArea" [data]="dataNavGPS"></p-chart>
       </div>
-      <div class="col-sm">
+      <div class="col-sm-6" [hidden]="!selectedRadioAltimetro">
         <p-chart type="line" [data]="dataNavRadio"></p-chart>
       </div>
   </div>
