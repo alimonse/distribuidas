@@ -1,54 +1,51 @@
-
+<br>
 
 <div class="container-fluid">
 
-<h3>Instrumentos</h3>
-<div class="row">
-    <div class="ui-g-3">
-      <p-checkbox 
-        name="group1" 
-        value="1" 
-        label="NavegacionInercial" 
-        binary="true"
-        (click)="mostrarNavInercial($event)"
-        [(ngModel)]="selectedNavInercial" 
-        inputId="1">
-      </p-checkbox>
-    </div>
-    <div class="ui-g-3">
-      <p-checkbox 
-        name="group1" 
-        value="3" 
-        label="GPS"
-        binary="true"
-        (click)="mostrarGPS($event)"
-        [(ngModel)]="selectedGPS" 
-        inputId="3">
-      </p-checkbox>
-    </div>
-    <div class="ui-g-3">
-      <p-checkbox 
-        name="group1" 
-        value="2" 
-        label="RadioAltimetro" 
-        binary="true"
-        (click)="mostrarNavInercial($event)"
-        [(ngModel)]="selectedRadioAltimetro" 
-        inputId="2">
-      </p-checkbox>
-    </div>
-</div>
+  <h3>Instrumentos</h3>
+  <div class="row">
+      <div class="ui-g-4">
+        <p-checkbox 
+          name="group1" 
+          value="1" 
+          label="NavegacionInercial" 
+          binary="true"
+          (click)="mostrarNavInercial($event)"
+          [(ngModel)]="selectedNavInercial">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-4">
+        <p-checkbox 
+          name="group1" 
+          value="3" 
+          label="GPS"
+          binary="true"
+          (click)="mostrarGPS($event)"
+          [(ngModel)]="selectedGPS">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-4">
+        <p-checkbox 
+          name="group1" 
+          value="2" 
+          label="RadioAltimetro" 
+          binary="true"
+          (click)="mostrarNavInercial($event)"
+          [(ngModel)]="selectedRadioAltimetro">
+        </p-checkbox>
+      </div>
+  </div>
 
-    <div class="row">
-      <div class="col-sm-6" [hidden]="!selectedNavInercial">
-        <p-chart type="radar" [data]="dataNavInercial"></p-chart>
-      </div>
-      <div class="col-sm-6" [hidden]="!selectedGPS">
-        <p-chart type="polarArea" [data]="dataNavGPS"></p-chart>
-      </div>
-      <div class="col-sm-6" [hidden]="!selectedRadioAltimetro">
-        <p-chart type="line" [data]="dataNavRadio"></p-chart>
-      </div>
+  <div class="row">
+        <div class="col-sm-4" [hidden]="!selectedNavInercial">
+          <p-chart type="radar" [data]="dataNavInercial"></p-chart>
+        </div>
+        <div class="col-sm-4" [hidden]="!selectedGPS">
+          <p-chart type="polarArea" [data]="dataNavGPS"></p-chart>
+        </div>
+        <div class="col-sm-4" [hidden]="!selectedRadioAltimetro">
+          <p-chart type="line" [data]="dataNavRadio"></p-chart>
+        </div>
   </div>
 </div>
 
