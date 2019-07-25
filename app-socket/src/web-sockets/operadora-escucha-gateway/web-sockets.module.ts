@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ClienteGateway } from "../cliente-gateway/cliente.gateway";
 import { OperadoraGateway } from "./operadora.gateway";
-import { InstrumentosRadio } from "web-sockets/cliente-gateway/instrumento-radio";
+import { RadioModule } from "radio/radio.module";
 
 @Module({
-    imports:[ClienteGateway, OperadoraGateway, InstrumentosRadio],
+    imports:[ClienteGateway, OperadoraGateway,RadioModule],
     exports:[OperadoraGateway],
     
 })

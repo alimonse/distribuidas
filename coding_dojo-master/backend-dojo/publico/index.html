@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="socket.io.js"></script>
+
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hola</h1>
+
+    <script>
+        const server = io('http://localhost:3002/chat');
+
+        let nick = ''
+
+
+        server.on('connect', () => {
+            console.log('Socket Conectado Correctamente')
+        });
+
+        server.on('disconnect', () => {
+            console.log('Se desconecto el Socket')
+        })
+
+        server.on('ingresoCliente', data => {
+            console.log('Recibí una respuesta', data)
+        })
+
+        server.on('respuestaUsuario', (data) => {
+            console.log(data.nick + ': ' + data.mensaje)
+        })
+
+        function login(nombre) {
+            console.log(nombre)
+            nick = nombre
+            server.emit('ingresoCliente', { nick, mensaje }, (data) => {
+                console.log(data.nick, data.mensaje)
+            })
+            return nick
+        }
+
+        function saludar(mensaje) {
+            server.emit('peticionUsuarioCliente', { nick, mensaje }, (data) => {
+                //console.log(data.nick,data.mensaje)
+            })
+        }
+
+    </script>
+</body>
+
+</html>

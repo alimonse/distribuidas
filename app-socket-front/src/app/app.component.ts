@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Service } from './service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   //  selectedCategories: string[] = ['navIn', 'alt', 'GPS'];
   // selectedCategories: string[] = [];
 
-  isShown: boolean = false ;
+  isShown: boolean = false;
 
   selectedNavInercial: boolean = true;
   selectedRadioAltimetro: boolean = true;
@@ -30,23 +31,42 @@ export class AppComponent {
 
   tiempo;
 
-  constructor() {
+  paquetasoAli = []
+  constructor(
+    private readonly _service: Service
+  ) {
     //setTimeout()
     // this.crearRandomicosNavegacionInercial(this.MAX, this.MIN);
     // this.crearRandomicosRadioaltímetro(this.MAX, this.MIN);
     // this.crearRandomicosGPS(this.MAX, this.MIN);
     // this.graficar();
 
+
+    
     this.tiempo = setInterval(() => {
-      this.crearRandomicosNavegacionInercial(this.MAX, this.MIN);
+      this.obternerDatosRadio()
+   /*    this.crearRandomicosNavegacionInercial(this.MAX, this.MIN);
       this.crearRandomicosRadioaltímetro(this.MAX, this.MIN);
-      this.crearRandomicosGPS(this.MAX, this.MIN);
+      this.crearRandomicosGPS(this.MAX, this.MIN); */
       this.graficar();
-    }, 2500)
+    }, 500)
 
   }
 
-  crearRandomicosNavegacionInercial(max, min) {
+
+  obternerDatosRadio() {
+
+    this._service.buscarTodosHospital().subscribe((resp: any []) => {
+      resp.forEach((valor:any)=>{
+        console.log((JSON.parse(valor.paqueteDatos)));
+        this.paquetasoAli.push((JSON.parse(valor.paqueteDatos)).paquete)
+      })
+      console.log('JSON.stringify(this.datosRadioaltimetro)',resp)
+      console.log('aliii', this.paquetasoAli)
+    })
+  }
+
+  /* crearRandomicosNavegacionInercial(max, min) {
     var paso;
     for (paso = 0; paso < 6; paso++) {
       if (paso < 5) {
@@ -66,7 +86,7 @@ export class AppComponent {
     };
     // console.log(this.datosRadioaltimetro, 'datos')
   }
-
+ */
   crearRandomicosGPS(max, min) {
     var paso;
     for (paso = 0; paso < 6; paso++) {
@@ -84,58 +104,69 @@ export class AppComponent {
   // GPS ->  cinco datos de tipo real y un dato de tipo booleano
 
   graficar() {
-    this.dataNavInercial = {
-      labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6'],
-      datasets: [
-        {
-          label: 'Datos Navegación Inercial',
-          backgroundColor: 'rgba(179,181,198,0.2)',
-          borderColor: 'rgba(179,181,198,1)',
-          pointBackgroundColor: 'rgba(179,181,198,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(179,181,198,1)',
-          data: this.datosNavInercial
-        }
-      ]
-    }
 
-    this.dataNavRadio = {
-      labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6', 'Punto 7', 'Punto 8', 'Punto 9', 'Punto 10'],
-      datasets: [
+    console.log(this.paquetasoAli,  'PAQUETASO ALI')
+    this.paquetasoAli.forEach(valor => {
+      this.dataNavInercial = valor;
+      this.dataNavRadio = valor;
+      this.datosGPS = valor;
+
+      console.log(this.dataNavInercial, this.dataNavRadio, this.dataNavGPS , 'te quiero bola') 
+
+      this.dataNavInercial = {
+        labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6'],
+        datasets: [
           {
-              label: 'Radioaltimetro',
-              data: this.datosRadioaltimetro,
-              fill: false,
-              borderColor: '#4bc0c0'
+            label: 'Datos Navegación Inercial',
+            backgroundColor: 'rgba(179,181,198,0.2)',
+            borderColor: 'rgba(179,181,198,1)',
+            pointBackgroundColor: 'rgba(179,181,198,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            data: this.datosNavInercial
           }
-      ]
-    };
-
-    this.dataNavGPS = {
-      datasets: [{
-        data: this.datosGPS,
-        backgroundColor: [
+        ]
+      }
+  
+      this.dataNavRadio = {
+        labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6', 'Punto 7', 'Punto 8', 'Punto 9', 'Punto 10'],
+        datasets: [
+          {
+            label: 'Radioaltimetro',
+            data: this.datosRadioaltimetro,
+            fill: false,
+            borderColor: '#4bc0c0'
+          }
+        ]
+      };
+  
+      this.dataNavGPS = {
+        datasets: [{
+          data: this.datosGPS,
+          backgroundColor: [
             "#FF6384",
             "#4BC0C0",
             "#FFCE56",
             "#E7E9ED",
             "#36A2EB",
             "#36A2EB"
-        ],
-        label: 'GPS'
-    }],
-    labels: [
-        "Punto 1",
-        "Punto 2",
-        "Punto 3",
-        "Punto 4",
-        "Punto 5",
-        "Punto 6"
-    ]
-    };
+          ],
+          label: 'GPS'
+        }],
+        labels: [
+          "Punto 1",
+          "Punto 2",
+          "Punto 3",
+          "Punto 4",
+          "Punto 5",
+          "Punto 6"
+        ]
+      };
+    })
+  
 
-  } 
+  }
 
   mostrarNavInercial($event: Event) {
     this.selectedNavInercial != this.selectedNavInercial //create new data

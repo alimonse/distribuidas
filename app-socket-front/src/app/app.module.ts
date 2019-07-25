@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,8 +9,10 @@ import {ButtonModule} from 'primeng/button';
 import { FormsModule }    from '@angular/forms';
 
 
+
 import {ChartModule} from 'primeng/chart';
 import {CheckboxModule} from 'primeng/checkbox';
+import { Service } from './service';
 
 
 @NgModule({
@@ -23,9 +26,10 @@ import {CheckboxModule} from 'primeng/checkbox';
     BrowserAnimationsModule,
     ChartModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

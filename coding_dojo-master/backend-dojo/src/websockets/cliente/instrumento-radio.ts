@@ -16,8 +16,8 @@ export class InstrumentosRadio implements OnGatewayInit, OnGatewayConnection, On
     afterInit(server: any) {
         console.log('Init Cliente');
     }
-	handleConnection(client: any, ...args: any[]) {
-		console.log('Usuario: conexion de cliente', client.id, args);
+    handleConnection(client: any, ...args: any[]) {
+	    console.log('Usuario: conexion de cliente', client.id, args);
 	}
 	handleDisconnect(client: any) {
 		console.log('disconnect', client.id);

@@ -14,6 +14,8 @@ const io = require('socket.io-client');
 @WebSocketGateway(3002)
 export class OperadoraGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
 
+
+
     afterInit(server: any) {
         console.log('Init Operadora-escucha');
         

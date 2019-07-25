@@ -1,0 +1,27 @@
+<div class="container">
+  <form [formGroup]="registroFormulario">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Ej: Kevin" formControlName="nombre">
+      <small id="emailHelp" class="form-text text-muted">Ingresar Nombre.</small>
+    </div>
+    <div class="form-group">
+      <label >Nick Name</label>
+      <input type="text" class="form-control" placeholder="Ej: Kev24" aria-describedby="nickNameHelp" formControlName="nickName">
+      <small id="nickNameHelp" class="form-text text-muted">Ingresar Nick Name.</small>
+    </div>
+    <div class="form-group">
+      <label>Edad</label>
+      <input type="number" class="form-control" aria-describedby="edadlHelp" placeholder="Ej 25" formControlName="edad">
+      <small id="edadlHelp" class="form-text text-muted">Edad</small>
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">      
+    </div>
+    <button type="submit" class="btn btn-outline-primary" [disabled]="habilitarButon" 
+    (click)="registro()">
+      Submit
+    </button>
+  </form>
+</div>

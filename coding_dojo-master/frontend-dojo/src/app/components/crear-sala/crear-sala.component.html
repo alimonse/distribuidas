@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <form>
+        <div class="form-group">
+          <label>Nombre Sala</label>
+          <input type="text" class="form-control" aria-describedby="salaHelp" placeholder="Ej panas" #nombre>
+          <small id="salaHelp" class="form-text text-muted">Nombre de la sala</small>
+        </div>
+        <div class="form-group">
+          <label>Numero Sala</label>
+          <input type="number" class="form-control" placeholder="Ej: 2" aria-describedby="numeroHelp" #numero>
+          <small id="numeroHelp" class="form-text text-muted">Nombre de la sala</small>
+        </div>
+        <button type="submit" class="btn btn-outline-warning" (click)="crearSala(nombre.value,numero.value)">
+          Crear
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
