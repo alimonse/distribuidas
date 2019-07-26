@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class Service {
 
     constructor(public _httpClient: HttpClient) { }
-    buscarTodosHospital():Observable<any> {
+    buscarTodos():Observable<any> {
         return this._httpClient.get(environment.url + '/radio/r');
     }
 

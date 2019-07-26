@@ -31,12 +31,17 @@ export class RadioController {
     @Get('crear')
     async create(
     ) {
-        const radioCrear = await this._radioService.crear(5, 8);
-        return radioCrear;
+        var i=0;
+        do{
+            const radioCrear = await this._radioService.crear(1, 100);
+            
+        }while(i=100)
+       
     }
 
     @Get('r')
     async findAll() {
+        
         const todosLosRadios = await this._radioService.buscarTodos();
         return todosLosRadios;
     }

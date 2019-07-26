@@ -9,9 +9,6 @@ import { Service } from './service';
 export class AppComponent {
   title = 'app-socket-front';
 
-  //  selectedCategories: string[] = ['navIn', 'alt', 'GPS'];
-  // selectedCategories: string[] = [];
-
   isShown: boolean = false;
 
   selectedNavInercial: boolean = true;
@@ -22,8 +19,8 @@ export class AppComponent {
   dataNavRadio: any;
   dataNavGPS: any;
 
-  datosNavInercial = [] = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
-  datosRadioaltimetro = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  datosNavInercial = [] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  datosRadioaltimetro = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   datosGPS = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
   MAX = 10;
@@ -31,87 +28,43 @@ export class AppComponent {
 
   tiempo;
 
+  val: number = 1000;
+
   paquetasoAli = []
   constructor(
     private readonly _service: Service
   ) {
-    //setTimeout()
-    // this.crearRandomicosNavegacionInercial(this.MAX, this.MIN);
-    // this.crearRandomicosRadioaltímetro(this.MAX, this.MIN);
-    // this.crearRandomicosGPS(this.MAX, this.MIN);
-    // this.graficar();
-
-
-    
     this.tiempo = setInterval(() => {
       this.obternerDatosRadio()
-   /*    this.crearRandomicosNavegacionInercial(this.MAX, this.MIN);
-      this.crearRandomicosRadioaltímetro(this.MAX, this.MIN);
-      this.crearRandomicosGPS(this.MAX, this.MIN); */
       this.graficar();
-    }, 500)
+    }, this.val)
 
   }
 
 
   obternerDatosRadio() {
 
-    this._service.buscarTodosHospital().subscribe((resp: any []) => {
-      resp.forEach((valor:any)=>{
+    this._service.buscarTodos().subscribe((resp: any[]) => {
+      resp.forEach((valor: any) => {
         console.log((JSON.parse(valor.paqueteDatos)));
         this.paquetasoAli.push((JSON.parse(valor.paqueteDatos)).paquete)
       })
-      console.log('JSON.stringify(this.datosRadioaltimetro)',resp)
-      console.log('aliii', this.paquetasoAli)
+      console.log('JSON.stringify(this.datosRadioaltimetro)', resp)
     })
   }
 
-  /* crearRandomicosNavegacionInercial(max, min) {
-    var paso;
-    for (paso = 0; paso < 6; paso++) {
-      if (paso < 5) {
-        this.datosNavInercial[paso] = Math.round(Math.random() * (max - min) + min);
-      }
-      else {
-        this.datosNavInercial[paso] = Math.round(Math.random() * (max - min) + min)
-      }
-    };
-    // console.log(this.datosNavInercial, 'datos')
-  }
 
-  crearRandomicosRadioaltímetro(max, min) {
-    var paso;
-    for (paso = 0; paso < 10; paso++) {
-      this.datosRadioaltimetro[paso] = Math.round(Math.random() * (max - min) + min);
-    };
-    // console.log(this.datosRadioaltimetro, 'datos')
-  }
- */
-  crearRandomicosGPS(max, min) {
-    var paso;
-    for (paso = 0; paso < 6; paso++) {
-      if (paso < 5) {
-        this.datosGPS[paso] = Math.round(Math.random() * (max - min) + min);
-      }
-      else {
-        this.datosGPS[paso] = Math.round(Math.random() * (1 - 0) + 0)
-      }
-    };
-    // console.log(this.datosGPS, 'datos GPS')
-  }
-  //  navegación inercial ->  tres datos de tipo entero y tres de tipo real
-  // radioaltímetro ->  10 datos de tipo real
-  // GPS ->  cinco datos de tipo real y un dato de tipo booleano
 
   graficar() {
 
-    console.log(this.paquetasoAli,  'PAQUETASO ALI')
-    this.paquetasoAli.forEach(valor => {
-      this.dataNavInercial = valor;
-      this.dataNavRadio = valor;
-      this.datosGPS = valor;
 
-      console.log(this.dataNavInercial, this.dataNavRadio, this.dataNavGPS , 'te quiero bola') 
+    this.paquetasoAli.forEach(valor => {
+      //console.log(valor,'esto es valor forEach')
+      this.datosNavInercial = valor;
+      this.datosRadioaltimetro = valor;
+      this.datosGPS = valor;
+    })
+      //console.log(this.paquetasoAli,  'PAQUETASO ALI')
 
       this.dataNavInercial = {
         labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6'],
@@ -128,7 +81,7 @@ export class AppComponent {
           }
         ]
       }
-  
+
       this.dataNavRadio = {
         labels: ['Punto 1', 'Punto 2', 'Punto 3', 'Punto 4', 'Punto 5', 'Punto 6', 'Punto 7', 'Punto 8', 'Punto 9', 'Punto 10'],
         datasets: [
@@ -140,7 +93,7 @@ export class AppComponent {
           }
         ]
       };
-  
+
       this.dataNavGPS = {
         datasets: [{
           data: this.datosGPS,
@@ -163,23 +116,29 @@ export class AppComponent {
           "Punto 6"
         ]
       };
-    })
-  
 
-  }
+    }
 
-  mostrarNavInercial($event: Event) {
-    this.selectedNavInercial != this.selectedNavInercial //create new data
-  }
-
-  mostrarRadioAltimetro($event: Event) {
-    this.selectedRadioAltimetro != this.selectedNavInercial //create new data
-    console.log(this.selectedNavInercial, 'que imprime')
-  }
-
-  mostrarGPS($event: Event) {
-    this.selectedGPS != this.selectedNavInercial //create new data
-    console.log(this.selectedNavInercial, 'que imprime')
-  }
+    mostrarNavInercial($event: Event) {
+      this.selectedNavInercial != this.selectedNavInercial //create new data
+    }
+    
+    mostrarRadioAltimetro($event: Event) {
+      this.selectedRadioAltimetro != this.selectedNavInercial //create new data
+      console.log(this.selectedNavInercial, 'que imprime')
+    }
+    
+    mostrarGPS($event: Event) {
+      this.selectedGPS != this.selectedNavInercial //create new data
+      console.log(this.selectedNavInercial, 'que imprime')
+    }
+    
+    mostrar(){
+      clearInterval(this.tiempo);
+      this.tiempo = setInterval(() => {
+        this.obternerDatosRadio()
+        this.graficar();
+      }, this.val)
+    }
 
 }

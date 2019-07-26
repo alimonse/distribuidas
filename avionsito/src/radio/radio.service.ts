@@ -21,7 +21,12 @@ export class RadioService {
         return await this._radioRepository.find();
     }
 
+    
+
     async crear(max, min) {
+       var i=0;
+    
+        
         let paso;
         for (paso = 0; paso < 10; paso++) {
             this.datosRadioaltimetro.paquete[paso] = Math.round(Math.random() * (max - min) + min);
@@ -30,6 +35,9 @@ export class RadioService {
         b.paqueteDatos = JSON.stringify(this.datosRadioaltimetro);
         const a = this._radioRepository.create(b);
         return this._radioRepository.save(a);
+    
+       
+        
     }
 
 }

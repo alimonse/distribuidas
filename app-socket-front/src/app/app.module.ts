@@ -13,6 +13,7 @@ import { FormsModule }    from '@angular/forms';
 import {ChartModule} from 'primeng/chart';
 import {CheckboxModule} from 'primeng/checkbox';
 import { Service } from './service';
+import {SpinnerModule} from 'primeng/spinner';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { Service } from './service';
     CheckboxModule,
     FormsModule,
     HttpClientModule,
+    SpinnerModule,
   ],
   providers: [Service],
   bootstrap: [AppComponent]

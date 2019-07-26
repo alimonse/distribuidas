@@ -22,7 +22,7 @@ import { RadioModule } from './radio/radio.module';
       retryAttempts: 3,
       connectTimeout: 40000,
       keepConnectionAlive: true,
-      dropSchema: false,
+      dropSchema: true,
       charset: 'utf8mb4',
       timezone: 'local',
       ssl: false,
