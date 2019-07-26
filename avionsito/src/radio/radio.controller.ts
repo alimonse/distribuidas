@@ -8,10 +8,17 @@ export class RadioController {
         paquete: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     };
 
+    tiempo;
     constructor(
         // tslint:disable-next-line: variable-name
         private readonly _radioService: RadioService,
-    ) { }
+    ) {
+
+        this.tiempo = setInterval(() => {
+           this.create()
+          }, 1000)
+
+     }
 
    /*  @Get('crear')
     async create(
@@ -32,10 +39,9 @@ export class RadioController {
     async create(
     ) {
         var i=0;
-        do{
+   
             const radioCrear = await this._radioService.crear(1, 100);
-            
-        }while(i=100)
+        
        
     }
 
