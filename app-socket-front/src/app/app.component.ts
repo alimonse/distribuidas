@@ -46,10 +46,10 @@ export class AppComponent {
 
     this._service.buscarTodos().subscribe((resp: any[]) => {
       resp.forEach((valor: any) => {
-        console.log((JSON.parse(valor.paqueteDatos)));
+        // console.log((JSON.parse(valor.paqueteDatos)));
         this.paquetasoAli.push((JSON.parse(valor.paqueteDatos)).paquete)
       })
-      console.log('JSON.stringify(this.datosRadioaltimetro)', resp)
+      // console.log('JSON.stringify(this.datosRadioaltimetro)', resp)
     })
   }
 
@@ -125,12 +125,12 @@ export class AppComponent {
     
     mostrarRadioAltimetro($event: Event) {
       this.selectedRadioAltimetro != this.selectedNavInercial //create new data
-      console.log(this.selectedNavInercial, 'que imprime')
+      // console.log(this.selectedNavInercial, 'que imprime')
     }
     
     mostrarGPS($event: Event) {
       this.selectedGPS != this.selectedNavInercial //create new data
-      console.log(this.selectedNavInercial, 'que imprime')
+      // console.log(this.selectedNavInercial, 'que imprime')
     }
     
     mostrar(){
